@@ -1,0 +1,43 @@
+---
+title: "Listas"
+author: "Daniel Eduardo Macias Estrada"
+date: "9/1/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## List
+
+Lista formada por diferentes objetos, no necesariamente del mismo tipo, cada cual con un nombre interno
+
+* **list(...)**: función que crea una list
+    * Para obtener una componente concreta usamos la instrucción **list$componente**
+    * También podemos indicar el objeto por su posición usando sobles corchetes: **list[[i]]**. Si solo se usa un corchete, lo que obtendremos es una list formada por esa única componente, no el objeto que forma la componente
+
+
+### Ejemplo
+
+```{r list}
+x = c(4,2,5,-1,5,2,1,-3)
+L = list(nombre = "temperaturas", datos = x, media = mean(x), sumas = cumsum(x))
+L
+L$media
+L$datos
+L[[3]]
+L[3]
+```
+
+
+## Obtener información de una list
+
+* **str(list)**: para conocer la estructura interna de una list
+* **names(list)**: para saber los nombres de la list
+
+```{r info}
+str(L)
+names(L)
+```
+

@@ -1,0 +1,146 @@
+---
+title: "Tarea 3: Estructuras de datos"
+author: "Daniel Eduardo Macias Estrada"
+date: "10/1/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Ejercicio 1
+
+Cread un vector llamado "Harry" formado por la sucesión de números consecutivos entre el -10 y 27. Pedidle a R que os devuelva el elemento de índice 7. Escribid el resultado.
+
+```{r ejercicio1}
+Harry = -10:27
+Harry
+Harry[7]
+```
+
+## Ejercicio 2
+
+Dad el máximo de la sucesión $(100*2^n -7*3^n)$ con $n=0,...,200$
+
+```{r ejercicio2}
+func = function(x){100*2^x - 7*3^x}
+x = 0:200
+max(sapply(x, FUN = func))
+```
+
+## Ejercicio 3
+
+Cread la sucesión de números consecutivos entre 0 y 40. A continuación, cread el vector $(3*5^n - 1)$ con n=0,...,40. Ponedle como nombre x. Ahora, dad el subvector de los elementos que son estrictamente mayores que 3.5
+
+```{r ejercicio3}
+x = 0:40
+y = 3 * 5^x - 1
+y[y > 3.5]
+```
+
+## Ejercicio 4
+
+Cread una función que os devuelva la parte real, la imaginaria, el módulo, el argumento y el conjugado de un número, mostrando solo 2 cifras significativas
+
+```{r ejercicio4}
+numInfo = function(x){
+  round(c(Re(x), Im(x), Mod(x), Arg(x), Conj(x)), 2)
+}
+numInfo(3+4i)
+```
+
+## Ejercicio 5
+
+Cread una función que resuelva ecuaciones de segundo grado (de la forma $Ax^2+Bx+C=0$). No importa, por ahora, que tengáis en cuenta las que no tienen solución
+
+```{r ejercicio5}
+eq2 = function(x){
+  d = sqrt(x[2]^2 - 4*x[1]*x[3])
+  a1 = (-x[2] + d) / (2*x[1])
+  a2 = (-x[2] - d) / (2*x[1])
+  # Dos soluciones
+  c(a1,a2)
+}
+eq2(c(2,5,2))
+```
+
+## Ejercicio 6
+
+Tomando el vector vec = c(0,9,98,2,6,7,5,19,88,20,16,0), dad 3 opciones diferentes para calcular el subvector c(9,19,20,16)
+
+Tomando el vector vec definido en el apartado anterior, buscad
+
+* qué entradas son pares
+
+* qué entradas no son pares y mayores que 20
+
+* dónde toma vec su valor máximo
+
+* dónde toma vec sus valores mínimos
+
+```{r ejercicio6}
+vec = c(0,9,98,2,6,7,5,19,88,20,16,0)
+
+#Calcular el subvector
+#1.-
+vec[c(2,8,10,11)]
+
+#2.-
+vec[vec > 8 & vec <21]
+
+#3.-
+
+# Pares
+vec[vec%%2 == 0 & vec != 0]
+
+# No pares y mayores de 20
+vec[vec%%2 != 0 & vec > 20]
+
+# Indice del valor máximo
+which.max(vec)
+
+# Indices de los valores minimos
+which(vec == min(vec))
+```
+
+## Ejercicio 7
+
+Dar la entrada $(2,2)$ de $A \cdot (A + A) \cdot A$ con $$A = \begin{pmatrix} 1 & 3\\ 2 & 4 \end{pmatrix}$$
+
+```{r ejercicio7}
+A = rbind(c(1,3),c(2,4))
+A %*% (A+A) %*% A
+```
+
+## Ejercicio 8
+
+Dar los valores propios de la matriz $$B = \begin{pmatrix} 2 & 4 & -6\\ 0 & 0 & 3 \\ 0 & -2 & 5 \end{pmatrix}$$
+
+```{r ejercicio8}
+B = rbind(c(2,4,-6),c(0,0,3),c(0,-2,5))
+eigen(B)$values
+```
+
+## Ejercicio 9
+
+Dad, redondeando a 3 cifras decimales, los vectores propios de la matriz
+
+$$C = \begin{pmatrix} -48 & 35 & -12\\ -134 & 95 & -32 \\ -194 & 133 & -44 \end{pmatrix}$$
+
+```{r ejercicio9}
+C = rbind(c(-48,35,-12),c(-134,95,-32),c(-194,133,-44))
+round(eigen(C)$vectors,3)
+```
+
+## Ejercicio 10
+
+Dar el rango de la matriz
+
+$$D = \begin{pmatrix} -2 & -8 & -2 & 3\\ -3 & -6 & -1 & 2 \\ -9 & -22 & -3 & 7 \\ -18 & -44 & -8 & 15 \end{pmatrix}$$
+
+```{r ejercicio10}
+D = rbind(c(-2,-8,-2,3), c(-3,-6,-1,2), c(-9,-22,-3,7), c(-18,-44,-8,15))
+qr(D)$rank
+```
+

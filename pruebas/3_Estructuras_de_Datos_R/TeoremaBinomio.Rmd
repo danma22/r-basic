@@ -1,0 +1,35 @@
+---
+title: "Binomio de Newton - Ejercicio"
+author: "Daniel Eduardo Macias Estrada"
+date: "7/1/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Producto notable
+
+Un binomio al cuadrado es igual:
+$$(a+b)^2 = a^2+2ab+b^2$$
+
+```{r binomioCuadrado}
+binNewton2 = function(a,b){a^2 + 2*a*b + b^2}
+binNewton2(3,4)
+```
+
+## Teorema del binomio
+
+La expresión general para obtener un binomio de newton es:
+
+$$(a+b)^n = \sum_{k=0}^n {n \choose k} \cdot a^{n-k} \cdot b^k = {n \choose 0} \cdot a^n \cdot b^0 + \cdots + {n \choose n} \cdot a^0 \cdot b^n$$
+
+```{r binomioNewton}
+binNewton = function(a,b,n){
+  cumsum(choose(n,0:n) * a^(n-0:n) * b^(0:n))[n+1]
+}
+binNewton(3,4,2)
+binNewton(4,7,11)
+```
+
