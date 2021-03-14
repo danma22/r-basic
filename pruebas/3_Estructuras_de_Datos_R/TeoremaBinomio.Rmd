@@ -31,5 +31,6 @@ binNewton = function(a,b,n){
 }
 binNewton(3,4,2)
 binNewton(4,7,11)
+binNewton()
 ```
 
