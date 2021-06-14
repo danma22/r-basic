@@ -1,0 +1,48 @@
+---
+title: "Tarea 9"
+author: "Daniel Eduardo Macias Estrada"
+date: "12/6/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Ejercicio de data frames
+
+### Problema 1
+Indica cuantos estudiantes formaron parte del estudio de deporte
+
+```{r problema1}
+df = read.csv("../../data/run.csv", row.names = "X")
+df
+nrow(df)
+```
+
+### Problema 2
+Indica cuantos individuos son hombres y cuantos son mujeres
+
+```{r problema2}
+nrow(df[df$genero == "H", ])
+nrow(df[df$genero == "M", ])
+```
+
+
+### Problema 3
+
+Calcula el porcentaje medio de variación del pulso por minuto entre antes y después de hacer ejercicio y compara el valor de los que hacen ejercicio habitualmente y los que no. ¿Observas mucha diferencia?
+
+
+```{r problema3}
+df2 = df[df$genero == "H", 1:2]
+df2 = cbind(df2, )
+
+func_porc = function(x){
+  ((x['pulso.despues'] - x['pulso.antes']) / x['pulso.antes']) * 100
+}
+
+sapply(df[df$genero == "H", 1:2], func_porc)
+```
+
+

@@ -1,0 +1,82 @@
+---
+title: "Tarea 8"
+author: "Daniel Eduardo Macias Estrada"
+date: "17/5/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+Se cargará el siguiente dataset: http://winterolympicsmedals.com/medals.csv
+
+### Pregunta 1
+
+¿Cuantos deportistas aparecen en el data frame?
+
+```{r pregunta1}
+df = read.csv("http://winterolympicsmedals.com/medals.csv", 
+              fill = TRUE,
+              header = TRUE)
+nrow(df)
+str(df)
+```
+
+
+### Pregunta 2
+
+¿Cuantos han ganado medallas de oro, cuantos de plata y cuantos de bronce?
+
+```{r pregunta2}
+sprintf("Medalla de oro: %i", nrow(subset(df, Medal == "Gold")))
+sprintf("Medalla de plata: %i", nrow(subset(df, Medal == "Silver")))
+sprintf("Medalla de bronce: %i", nrow(subset(df, Medal == "Bronze")))
+```
+
+### Pregunta 3
+
+¿En cuantos lugares se han hecho olimpiadas de invierno?
+
+```{r pregunta3}
+df$City = as.factor(df$City)
+length(levels(df$City))
+```
+
+
+### Pregunta 4
+
+¿Cuantos hombres y cuantas mujeres hay?
+
+```{r pregunta4}
+sprintf("Hombres: %i", nrow(subset(df, Event.gender == "M")))
+sprintf("Mujeres: %i", nrow(subset(df, Event.gender == "W")))
+```
+
+
+### Pregunta 5
+
+¿En qué año participaron más deportistas?
+
+```{r pregunta5}
+cont = count(df, Year)
+cont[cont$n == max(cont$n), c(1)]
+```
+
+
+### Pregunta 6
+
+El campo NOC indica el país del ganador de la medalla. ¿Qué país puede presumir de haber ganado más medallas de oro en los juegos de invierno entre 1960 y 1996?
+
+```{r pregunta6}
+goldMedals = subset(df, Medal == "Gold" & (Year >= 1960 & Year <= 1996))
+cont = count(goldMedals, NOC)
+cont[cont$n == max(cont$n), c(1)]
+```
+
+
+
+
+
+
